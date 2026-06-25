@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dashboard Frota — Tánaporta</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{
+  --g1:#1B5E20;--g2:#2E7D32;--g3:#388E3C;--g4:#4CAF50;--gp:#E8F5E9;
+  --or:#E65100;--re:#C62828;--bl:#1565C0;
+  --bg:#F0F4F0;--card:#fff;--txt:#1A2E1A;--muted:#5A7A5A;--bdr:#C8E6C9;
+  --sh:0 2px 12px rgba(27,94,32,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;}
+
+/* HEADER */
+.hdr{background:linear-gradient(135deg,var(--g1),var(--g3));color:#fff;
+  padding:0 32px;display:flex;align-items:center;justify-content:space-between;
+  height:68px;box-shadow:0 4px 16px rgba(0,0,0,.2);position:sticky;top:0;z-index:200;}
+.hdr h1{font-size:1.15rem;font-weight:700;}
+.hdr p{font-size:.75rem;opacity:.85;margin-top:2px;}
+.badge{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);
+  padding:5px 13px;border-radius:20px;font-size:.76rem;}
+.badge-ok{background:rgba(76,175,80,.3);border-color:rgba(76,175,80,.6);font-weight:600;}
+
+/* TABS */
+.tab-bar{background:var(--g1);display:flex;gap:2px;padding:0 28px;position:sticky;top:68px;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.15);}
+.tab-btn{
+  padding:13px 22px;border:none;background:transparent;color:rgba(255,255,255,.7);
+  font-size:.85rem;font-weight:600;cursor:pointer;border-bottom:3px solid transparent;
+  transition:all .2s;white-space:nowrap;font-family:inherit;
+}
+.tab-btn:hover{color:#fff;background:rgba(255,255,255,.08);}
+.tab-btn.active{color:#fff;border-bottom-color:var(--g4);background:rgba(255,255,255,.1);}
+
+/* CONTENT */
+.tab-content{display:none;padding:24px 32px 48px;max-width:1600px;margin:0 auto;animation:fadeIn .25s ease;}
+.tab-content.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* SECTION LABEL */
+.slabel{font-size:.68rem;font-weight:700;letter-spacing:1.5px;color:var(--g2);
+  text-transform:uppercase;margin:24px 0 12px;display:flex;align-items:center;gap:8px;}
+.slabel::after{content:'';flex:1;height:1px;background:var(--bdr);}
+
+/* KPI */
+.kpi-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;}
+@media(max-width:1200px){.kpi-grid{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:600px){.kpi-grid{grid-template-columns:repeat(2,1fr);}}
+.kpi{background:var(--card);border-radius:14px;padding:18px 16px;box-shadow:var(--sh);
+  border-left:5px solid var(--g4);display:flex;flex-direction:column;gap:5px;
+  transition:transform .18s,box-shadow .18s;}
+.kpi:hover{transform:translateY(-3px);box-shadow:0 6px 24px rgba(27,94,32,.15);}
+.kpi.or{border-left-color:var(--or);} .kpi.re{border-left-color:var(--re);} .kpi.bl{border-left-color:var(--bl);}
+.kpi-ico{font-size:1.4rem;} .kpi-lbl{font-size:.7rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px;}
+.kpi-val{font-size:1.75rem;font-weight:800;color:var(--g1);line-height:1;}
+.kpi.or .kpi-val{color:var(--or);} .kpi.re .kpi-val{color:var(--re);} .kpi.bl .kpi-val{color:var(--bl);}
+.kpi-sub{font-size:.7rem;color:var(--muted);}
+
+/* VEHICLE CARDS */
+.vgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+@media(max-width:900px){.vgrid{grid-template-columns:repeat(2,1fr);}}
+.vcard{background:var(--card);border-radius:14px;padding:16px;box-shadow:var(--sh);border-top:4px solid var(--g4);}
+.vplate{font-size:.95rem;font-weight:800;color:var(--g1);background:var(--gp);
+  padding:4px 10px;border-radius:6px;display:inline-block;margin-bottom:10px;letter-spacing:1px;}
+.vrow{display:flex;justify-content:space-between;margin:4px 0;font-size:.8rem;}
+.vrow span:first-child{color:var(--muted);font-weight:600;}
+.vrow span:last-child{font-weight:700;}
+.ebar-w{background:#eee;border-radius:8px;height:5px;margin-top:8px;overflow:hidden;}
+.ebar{height:100%;border-radius:8px;}
+
+/* CHART GRID */
+.cgrid{display:grid;gap:18px;margin-bottom:18px;}
+.c2{grid-template-columns:1fr 1fr;}
+.c3{grid-template-columns:2fr 1fr;}
+.c32{grid-template-columns:1fr 2fr;}
+.c1{grid-template-columns:1fr;}
+@media(max-width:900px){.c2,.c3,.c32{grid-template-columns:1fr;}}
+.ccard{background:var(--card);border-radius:14px;padding:20px 20px 14px;box-shadow:var(--sh);display:flex;flex-direction:column;}
+.ccard h3{font-size:.86rem;font-weight:700;color:var(--g1);margin-bottom:3px;}
+.ccard .sub{font-size:.7rem;color:var(--muted);margin-bottom:12px;}
+.cwrap{position:relative;flex:1;min-height:220px;}
+.cwrap.tall{min-height:300px;} .cwrap.sh{min-height:180px;}
+
+/* TABLE */
+.tcard{background:var(--card);border-radius:14px;padding:20px;box-shadow:var(--sh);overflow-x:auto;}
+.tcard h3{font-size:.86rem;font-weight:700;color:var(--g1);margin-bottom:12px;}
+table{width:100%;border-collapse:collapse;font-size:.81rem;}
+thead th{background:var(--g1);color:#fff;padding:10px 12px;text-align:left;font-weight:600;font-size:.74rem;}
+thead th:first-child{border-radius:8px 0 0 0;} thead th:last-child{border-radius:0 8px 0 0;}
+tbody tr{border-bottom:1px solid var(--bdr);transition:background .15s;}
+tbody tr:hover{background:var(--gp);}
+tbody td{padding:9px 12px;}
+.tag{display:inline-block;padding:2px 10px;border-radius:12px;font-size:.69rem;font-weight:700;}
+
+/* FOOTER */
+.footer{text-align:center;padding:20px;font-size:.71rem;color:var(--muted);border-top:1px solid var(--bdr);}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="hdr">
+  <div>
+    <h1>🚛 Dashboard de Frota — Tánaporta</h1>
+    <p>Quilometragem &amp; Combustível · Hortifruti Delivery</p>
+  </div>
+  <div style="display:flex;gap:10px;align-items:center;">
+    <span class="badge" id="bperiod">📅 ...</span>
+    <span class="badge badge-ok">✅ Atualizado em 25/06/2026 13:09</span>
+  </div>
+</div>
+
+<!-- TAB BAR -->
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="showTab('geral',this)">📊 Visão Geral</button>
+  <button class="tab-btn" onclick="showTab('km',this)">🛣 Quilometragem</button>
+  <button class="tab-btn" onclick="showTab('comb',this)">⛽ Combustível</button>
+  <button class="tab-btn" onclick="showTab('ent',this)">📦 Entregas</button>
+  <button class="tab-btn" onclick="showTab('man',this)">🔧 Manutenção</button>
+</div>
+
+<!-- ═══════════════ ABA 1: VISÃO GERAL ═══════════════ -->
+<div id="tab-geral" class="tab-content active">
+  <div class="slabel">📊 Indicadores do Mês</div>
+  <div class="kpi-grid" id="kpi-grid"></div>
+  <div class="slabel">🚗 Resumo por Veículo</div>
+  <div class="vgrid" id="vgrid"></div>
+</div>
+
+<!-- ═══════════════ ABA 2: QUILOMETRAGEM ═══════════════ -->
+<div id="tab-km" class="tab-content">
+  <div class="slabel">📈 KM por Veículo</div>
+  <div class="cgrid c3">
+    <div class="ccard"><h3>🔢 KM Rodados por Veículo</h3><p class="sub">Total acumulado no período</p><div class="cwrap"><canvas id="c-km-v"></canvas></div></div>
+    <div class="ccard"><h3>🍩 Participação na Frota</h3><p class="sub">% do total de km</p><div class="cwrap"><canvas id="c-km-d"></canvas></div></div>
+  </div>
+  <div class="slabel">📅 Evolução Diária</div>
+  <div class="cgrid c1">
+    <div class="ccard"><h3>📍 KM Rodados por Dia — Todos os Veículos</h3><p class="sub">Tendência de uso da frota ao longo do mês</p><div class="cwrap tall"><canvas id="c-km-dia"></canvas></div></div>
+  </div>
+  <div class="slabel">👤 KM por Motorista</div>
+  <div class="cgrid c1">
+    <div class="ccard"><h3>👤 KM por Motorista</h3><p class="sub">Total acumulado no período</p><div class="cwrap sh"><canvas id="c-mot"></canvas></div></div>
+  </div>
+</div>
+
+<!-- ═══════════════ ABA 3: COMBUSTÍVEL ═══════════════ -->
+<div id="tab-comb" class="tab-content">
+  <div class="slabel">⛽ Eficiência &amp; Gastos</div>
+  <div class="cgrid c2">
+    <div class="ccard"><h3>🏎 Eficiência (Km/L) por Veículo</h3><p class="sub">Linha laranja = média da frota. Verde = acima, vermelho = abaixo</p><div class="cwrap"><canvas id="c-kml"></canvas></div></div>
+    <div class="ccard"><h3>💰 Gasto por Veículo (R$)</h3><p class="sub">Combustível vs. Manutenção</p><div class="cwrap"><canvas id="c-custo"></canvas></div></div>
+  </div>
+  <div class="slabel">💧 Abastecimento ao Longo do Mês</div>
+  <div class="cgrid c1">
+    <div class="ccard"><h3>💧 Litros Acumulados por Veículo</h3><p class="sub">Evolução dos abastecimentos ao longo do mês</p><div class="cwrap"><canvas id="c-ab"></canvas></div></div>
+  </div>
+  <div class="slabel">📋 Histórico de Abastecimentos</div>
+  <div class="tcard">
+    <h3>⛽ Últimos Abastecimentos</h3>
+    <table><thead><tr><th>Data</th><th>Veículo</th><th>Litros</th><th>Valor (R$)</th><th>Preço/L</th></tr></thead>
+    <tbody id="tab-ab"></tbody></table>
+  </div>
+</div>
+
+<!-- ═══════════════ ABA 4: ENTREGAS ═══════════════ -->
+<div id="tab-ent" class="tab-content">
+  <div class="slabel">📦 Volume de Entregas</div>
+  <div class="cgrid c1">
+    <div class="ccard"><h3>📦 Entregas por Dia</h3><p class="sub">Volume diário de entregas realizadas no período</p><div class="cwrap tall"><canvas id="c-ent"></canvas></div></div>
+  </div>
+  <div class="cgrid c2" style="margin-top:18px;">
+    <div class="ccard" style="align-items:center;justify-content:center;padding:32px;">
+      <div style="font-size:3rem;font-weight:800;color:var(--g1)" id="tot-ent-big">-</div>
+      <div style="font-size:.85rem;color:var(--muted);margin-top:6px">Total de Entregas no Período</div>
+    </div>
+    <div class="ccard" style="align-items:center;justify-content:center;padding:32px;">
+      <div style="font-size:3rem;font-weight:800;color:var(--g2)" id="med-ent-big">-</div>
+      <div style="font-size:.85rem;color:var(--muted);margin-top:6px">Média Diária de Entregas</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ ABA 5: MANUTENÇÃO ═══════════════ -->
+<div id="tab-man" class="tab-content">
+  <div class="slabel">🔧 Custos de Manutenção</div>
+  <div class="cgrid c2">
+    <div class="ccard"><h3>🔧 Custo por Veículo</h3><p class="sub">Total investido em manutenção por veículo</p><div class="cwrap"><canvas id="c-man-v"></canvas></div></div>
+    <div class="ccard"><h3>📂 Distribuição por Tipo</h3><p class="sub">Corretiva vs. Preventiva</p><div class="cwrap"><canvas id="c-man-t"></canvas></div></div>
+  </div>
+  <div class="cgrid c1" style="margin-top:0;">
+    <div class="ccard"><h3>🛠 Distribuição por Causa</h3><p class="sub">Categoria do serviço realizado</p><div class="cwrap sh"><canvas id="c-man-c"></canvas></div></div>
+  </div>
+  <div class="slabel">📋 Histórico de Manutenções</div>
+  <div class="tcard">
+    <h3>🔧 Todos os Serviços Realizados</h3>
+    <table><thead><tr><th>Data</th><th>Veículo</th><th>Tipo</th><th>Descrição</th><th>Causa</th><th>Custo (R$)</th></tr></thead>
+    <tbody id="tab-man"></tbody></table>
+  </div>
+</div>
+
+<div class="footer">Tánaporta Hortifruti Delivery · Dashboard de Frota · Gerado automaticamente em 25/06/2026 13:09</div>
+
+<script>
+// ── DADOS ────────────────────────────────────────────────────────────────────
+const D = {"km_records": [{"data": "01/06", "veiculo": "FTD0129", "km_ini": 317561.0, "km_fin": 317595.0, "km_rodado": 34.0, "motorista": "Gabriel"}, {"data": "01/06", "veiculo": "JSZ8F14", "km_ini": 224007.0, "km_fin": 224096.0, "km_rodado": 89.0, "motorista": "Rudson"}, {"data": "02/06", "veiculo": "JSZ8F14", "km_ini": 224184.0, "km_fin": 224275.0, "km_rodado": 91.0, "motorista": "Rudson"}, {"data": "02/06", "veiculo": "JIH5498", "km_ini": 371645.0, "km_fin": 371713.0, "km_rodado": 68.0, "motorista": "Roniel"}, {"data": "02/06", "veiculo": "FTD0129", "km_ini": 317600.0, "km_fin": 317717.0, "km_rodado": 117.0, "motorista": "Gabriel"}, {"data": "03/06", "veiculo": "JIE3180", "km_ini": 353328.0, "km_fin": 353398.0, "km_rodado": 70.0, "motorista": "Roniel"}, {"data": "03/06", "veiculo": "JIH5498", "km_ini": 371770.0, "km_fin": 371860.0, "km_rodado": 90.0, "motorista": "Jacó"}, {"data": "03/06", "veiculo": "FTD0129", "km_ini": 317717.0, "km_fin": 317781.0, "km_rodado": 64.0, "motorista": "Gabriel"}, {"data": "03/06", "veiculo": "JSZ8F14", "km_ini": 224360.0, "km_fin": 224490.0, "km_rodado": 130.0, "motorista": "Rudson"}, {"data": "05/06", "veiculo": "JIH5498", "km_ini": 371916.0, "km_fin": 371991.0, "km_rodado": 75.0, "motorista": "Osair lima"}, {"data": "05/06", "veiculo": "JSZ8F14", "km_ini": 224511.0, "km_fin": 224593.0, "km_rodado": 82.0, "motorista": "Rudson"}, {"data": "05/06", "veiculo": "JIE3180", "km_ini": 353426.0, "km_fin": 353538.0, "km_rodado": 112.0, "motorista": "Jacó"}, {"data": "05/06", "veiculo": "FTD0129", "km_ini": 317877.0, "km_fin": 317946.0, "km_rodado": 69.0, "motorista": "Gabriel"}, {"data": "06/06", "veiculo": "JSZ8F14", "km_ini": 224688.0, "km_fin": 224739.0, "km_rodado": 51.0, "motorista": "Rudson"}, {"data": "08/06", "veiculo": "JSZ8F14", "km_ini": 224747.0, "km_fin": 224791.0, "km_rodado": 44.0, "motorista": "Rudson"}, {"data": "08/06", "veiculo": "JIH5498", "km_ini": 372178.0, "km_fin": 372300.0, "km_rodado": 122.0, "motorista": "Jacó"}, {"data": "08/06", "veiculo": "FTD0129", "km_ini": 318183.0, "km_fin": 318222.0, "km_rodado": 39.0, "motorista": "Rudson"}, {"data": "09/06", "veiculo": "JIH5498", "km_ini": 372358.0, "km_fin": 372458.0, "km_rodado": 100.0, "motorista": "Osair lima"}, {"data": "09/06", "veiculo": "JSZ8F14", "km_ini": 224949.0, "km_fin": 225012.0, "km_rodado": 63.0, "motorista": "Rudson"}, {"data": "09/06", "veiculo": "JIE3180", "km_ini": 353772.0, "km_fin": 353869.0, "km_rodado": 97.0, "motorista": "Jacó"}, {"data": "10/06", "veiculo": "FTD0129", "km_ini": 318485.0, "km_fin": 318584.0, "km_rodado": 99.0, "motorista": "Gabriel"}, {"data": "10/06", "veiculo": "JIE3180", "km_ini": 353926.0, "km_fin": 354016.0, "km_rodado": 90.0, "motorista": "Jacó"}, {"data": "10/06", "veiculo": "JSZ8F14", "km_ini": 225084.0, "km_fin": 225176.0, "km_rodado": 92.0, "motorista": "Rudson"}, {"data": "10/06", "veiculo": "JIH5498", "km_ini": 372516.0, "km_fin": 372582.0, "km_rodado": 66.0, "motorista": "Osair lima"}, {"data": "11/06", "veiculo": "JIE3180", "km_ini": 354039.0, "km_fin": 354105.0, "km_rodado": 66.0, "motorista": "Osair lima"}, {"data": "11/06", "veiculo": "JSZ8F14", "km_ini": 225237.0, "km_fin": 225320.0, "km_rodado": 83.0, "motorista": "Rudson"}, {"data": "12/06", "veiculo": "JSZ8F14", "km_ini": 225489.0, "km_fin": 225602.0, "km_rodado": 113.0, "motorista": "Rudson"}, {"data": "12/06", "veiculo": "JIE3180", "km_ini": 354199.0, "km_fin": 354264.0, "km_rodado": 65.0, "motorista": "Jacó"}, {"data": "12/06", "veiculo": "FTD0129", "km_ini": 319015.0, "km_fin": 319126.0, "km_rodado": 111.0, "motorista": "Jacó"}, {"data": "13/06", "veiculo": "JSZ8F14", "km_ini": 225715.0, "km_fin": 225800.0, "km_rodado": 85.0, "motorista": "Rudson"}, {"data": "15/06", "veiculo": "JIE3180", "km_ini": 354325.0, "km_fin": 354411.0, "km_rodado": 86.0, "motorista": "Rudson"}, {"data": "16/06", "veiculo": "JSZ8F14", "km_ini": 225921.0, "km_fin": 226007.0, "km_rodado": 86.0, "motorista": "Rudson"}, {"data": "16/06", "veiculo": "FTD0129", "km_ini": 319301.0, "km_fin": 319466.0, "km_rodado": 165.0, "motorista": "Osair lima"}, {"data": "16/06", "veiculo": "JIE3180", "km_ini": 354485.0, "km_fin": 354565.0, "km_rodado": 80.0, "motorista": "Jacó"}, {"data": "17/06", "veiculo": "JSZ8F14", "km_ini": 226142.0, "km_fin": 226219.0, "km_rodado": 77.0, "motorista": "Rudson"}, {"data": "17/06", "veiculo": "JIE3180", "km_ini": 354631.0, "km_fin": 354737.0, "km_rodado": 106.0, "motorista": "Jacó"}, {"data": "18/06", "veiculo": "JIE3180", "km_ini": 354757.0, "km_fin": 354818.0, "km_rodado": 61.0, "motorista": "Osair lima"}, {"data": "18/06", "veiculo": "JSZ8F14", "km_ini": 226229.0, "km_fin": 226321.0, "km_rodado": 92.0, "motorista": "Rudson"}, {"data": "18/06", "veiculo": "FTD0129", "km_ini": 319598.0, "km_fin": 319638.0, "km_rodado": 40.0, "motorista": "Gabriel"}, {"data": "19/06", "veiculo": "FTD0129", "km_ini": 319782.0, "km_fin": 319829.0, "km_rodado": 47.0, "motorista": "Gabriel"}, {"data": "19/06", "veiculo": "JSZ8F14", "km_ini": 226380.0, "km_fin": 226433.0, "km_rodado": 53.0, "motorista": "Rudson"}, {"data": "20/06", "veiculo": "JIE3180", "km_ini": 354888.0, "km_fin": 354963.0, "km_rodado": 75.0, "motorista": "Osair lima"}, {"data": "20/06", "veiculo": "JSZ8F14", "km_ini": 226558.0, "km_fin": 226610.0, "km_rodado": 52.0, "motorista": "Rudson"}, {"data": "22/06", "veiculo": "JIE3180", "km_ini": 354984.0, "km_fin": 355051.0, "km_rodado": 67.0, "motorista": "Osair"}, {"data": "22/06", "veiculo": "JSZ8F14", "km_ini": 226631.0, "km_fin": 226745.0, "km_rodado": 114.0, "motorista": "Rudson"}, {"data": "23/06", "veiculo": "JSZ8F14", "km_ini": 226836.0, "km_fin": 226907.0, "km_rodado": 71.0, "motorista": "Rudson"}, {"data": "23/06", "veiculo": "JIE3180", "km_ini": 355091.0, "km_fin": 355157.0, "km_rodado": 66.0, "motorista": "Jacó"}, {"data": "23/06", "veiculo": "FTD0129", "km_ini": 320223.0, "km_fin": 320295.0, "km_rodado": 72.0, "motorista": "Gabriel"}, {"data": "24/06", "veiculo": "JSZ8F14", "km_ini": 226960.0, "km_fin": 227062.0, "km_rodado": 102.0, "motorista": "Rudson"}, {"data": "24/06", "veiculo": "JIE3180", "km_ini": 355186.0, "km_fin": 355292.0, "km_rodado": 106.0, "motorista": "Jacó"}, {"data": "24/06", "veiculo": "FTD0129", "km_ini": 320325.0, "km_fin": 320510.0, "km_rodado": 185.0, "motorista": "Gabriel"}, {"data": "25/06", "veiculo": "FTD0129", "km_ini": 320516.0, "km_fin": 320625.0, "km_rodado": 109.0, "motorista": "Gabriel"}, {"data": "25/06", "veiculo": "JSZ8F14", "km_ini": 227084.0, "km_fin": 227172.0, "km_rodado": 88.0, "motorista": "Rudson"}, {"data": "25/06", "veiculo": "JIE3180", "km_ini": 355303.0, "km_fin": 355357.0, "km_rodado": 54.0, "motorista": "Jacó"}], "ab_records": [{"data": "01/06", "veiculo": "FTD0129", "litros": 4.76, "valor": 30.0}, {"data": "02/06", "veiculo": "JSZ8F14", "litros": 20.0, "valor": 123.8}, {"data": "03/06", "veiculo": "FTD0129", "litros": 15.175, "valor": 100.0}, {"data": "03/06", "veiculo": "JIH5498", "litros": 15.175, "valor": 100.0}, {"data": "03/06", "veiculo": "JIE3180", "litros": 10.622, "valor": 70.0}, {"data": "03/06", "veiculo": "JSZ8F14", "litros": 10.0, "valor": 61.9}, {"data": "05/06", "veiculo": "JIE3180", "litros": 15.175, "valor": 100.0}, {"data": "05/06", "veiculo": "JSZ8F14", "litros": 15.175, "valor": 100.0}, {"data": "05/06", "veiculo": "JIH5498", "litros": 15.175, "valor": 100.0}, {"data": "05/06", "veiculo": "JSZ8F14", "litros": 15.0, "valor": 92.85}, {"data": "06/06", "veiculo": "JIE3180", "litros": 15.175, "valor": 100.0}, {"data": "06/06", "veiculo": "FTD0129", "litros": 11.228, "valor": 75.0}, {"data": "06/06", "veiculo": "JIH5498", "litros": 15.175, "valor": 100.0}, {"data": "08/06", "veiculo": "JIH5498", "litros": 15.175, "valor": 100.0}, {"data": "08/06", "veiculo": "JSZ8F14", "litros": 20.0, "valor": 125.16}, {"data": "08/06", "veiculo": "FTD0129", "litros": 15.175, "valor": 100.0}, {"data": "09/06", "veiculo": "JIE3180", "litros": 16.156, "valor": 100.0}, {"data": "09/06", "veiculo": "JIH5498", "litros": 15.175, "valor": 100.0}, {"data": "10/06", "veiculo": "JIE3180", "litros": 16.156, "valor": 100.0}, {"data": "10/06", "veiculo": "JIH5498", "litros": 15.175, "valor": 100.0}, {"data": "10/06", "veiculo": "FTD0129", "litros": 15.175, "valor": 100.0}, {"data": "10/06", "veiculo": "JSZ8F14", "litros": 15.175, "valor": 100.0}, {"data": "11/06", "veiculo": "FTD0129", "litros": 15.175, "valor": 100.0}, {"data": "11/06", "veiculo": "JIE3180", "litros": 15.175, "valor": 100.0}, {"data": "11/06", "veiculo": "JSZ8F14", "litros": 15.175, "valor": 100.0}, {"data": "12/06", "veiculo": "JSZ8F14", "litros": 22.762, "valor": 150.0}, {"data": "13/06", "veiculo": "FTD0129", "litros": 15.175, "valor": 100.0}, {"data": "13/06", "veiculo": "JIE3180", "litros": 15.175, "valor": 100.0}, {"data": "13/06", "veiculo": "JSZ8F14", "litros": 15.175, "valor": 100.0}, {"data": "15/06", "veiculo": "FTD0129", "litros": 22.762, "valor": 150.0}, {"data": "15/06", "veiculo": "JSZ8F14", "litros": 22.762, "valor": 150.0}, {"data": "15/06", "veiculo": "JIE3180", "litros": 22.762, "valor": 150.0}, {"data": "16/06", "veiculo": "FTD0129", "litros": 15.175, "valor": 6.59}, {"data": "17/06", "veiculo": "JIE3180", "litros": 25.042, "valor": 150.0}, {"data": "17/06", "veiculo": "FTD0129", "litros": 14.948, "valor": 100.0}, {"data": "17/06", "veiculo": "JSZ8F14", "litros": 15.175, "valor": 100.0}, {"data": "19/06", "veiculo": "FTD0129", "litros": 15.175, "valor": 100.0}, {"data": "19/06", "veiculo": "JSZ8F14", "litros": 15.175, "valor": 100.0}, {"data": "19/06", "veiculo": "JIE3180", "litros": 15.175, "valor": 100.0}, {"data": "20/06", "veiculo": "JSZ8F14", "litros": 15.175, "valor": 100.0}, {"data": "22/06", "veiculo": "FTD0129", "litros": 15.175, "valor": 100.0}, {"data": "22/06", "veiculo": "JIE3180", "litros": 15.175, "valor": 100.0}, {"data": "23/06", "veiculo": "JIE3180", "litros": 15.175, "valor": 100.0}, {"data": "24/06", "veiculo": "JSZ8F14", "litros": 15.898, "valor": 100.0}, {"data": "24/06", "veiculo": "JIE3180", "litros": 15.898, "valor": 100.0}, {"data": "24/06", "veiculo": "FTD0129", "litros": 15.898, "valor": 100.0}, {"data": "25/06", "veiculo": "FTD0129", "litros": 15.898, "valor": 100.0}, {"data": "25/06", "veiculo": "JIE3180", "litros": 15.898, "valor": 100.0}], "ent_records": [{"data": "01/06", "entregas": 40, "km_dia": 123}, {"data": "02/06", "entregas": 36, "km_dia": 276}, {"data": "03/06", "entregas": 39, "km_dia": 242}, {"data": "05/06", "entregas": 36, "km_dia": 338}, {"data": "06/06", "entregas": 27, "km_dia": 51}, {"data": "08/06", "entregas": 42, "km_dia": 205}, {"data": "09/06", "entregas": 38, "km_dia": 260}, {"data": "10/06", "entregas": 28, "km_dia": 347}, {"data": "11/06", "entregas": 34, "km_dia": 149}, {"data": "12/06", "entregas": 41, "km_dia": 178}, {"data": "13/06", "entregas": 21, "km_dia": 86}, {"data": "15/06", "entregas": 36, "km_dia": 85}, {"data": "16/06", "entregas": 37, "km_dia": 331}, {"data": "17/06", "entregas": 33, "km_dia": 92}, {"data": "18/06", "entregas": 37, "km_dia": 205}, {"data": "19/06", "entregas": 34, "km_dia": 109}, {"data": "20/06", "entregas": 25, "km_dia": 127}, {"data": "22/06", "entregas": 43, "km_dia": 181}, {"data": "23/06", "entregas": 30, "km_dia": 209}, {"data": "24/06", "entregas": 29, "km_dia": 208}, {"data": "25/06", "entregas": 28, "km_dia": 251}], "man_records": [{"data": "02/06", "veiculo": "JIE3180", "tipo": "CORRETIVA", "desc": "ÓLEO, FILTRO DE ÓLEO, TERMINAL, MAGNÉTICA E MÃO DE OBRA", "custo": 310.0, "causa": "PEÇAS"}, {"data": "02/06", "veiculo": "JIE3180", "tipo": "CORRETIVA", "desc": "GASOLINA PRA LAVAR PEÇAS", "custo": 10.0, "causa": "PEÇAS"}, {"data": "11/06", "veiculo": "FTD0129", "tipo": "PREVENTIVA", "desc": "FILTRO DE ÓLEO E OLÉO DE MOTOR", "custo": 556.0, "causa": "TROCA DE ÓLEO"}, {"data": "11/06", "veiculo": "FTD0129", "tipo": "CORRETIVA", "desc": "ABRAÇADEIRAS E FILTRO DE AR", "custo": 55.0, "causa": "PEÇAS"}, {"data": "11/06", "veiculo": "JIE3180", "tipo": "CORRETIVA", "desc": "REMENDO DE PNEU", "custo": 200.0, "causa": "PNEU"}, {"data": "15/06", "veiculo": "JSZ8F14", "tipo": "CORRETIVA", "desc": "ÓLEO, CILINDRO, ROLAMENTO E MÃO DE OBRA", "custo": 640.0, "causa": "PEÇAS"}, {"data": "19/06", "veiculo": "JIE3180", "tipo": "CORRETIVA", "desc": "TROCA PASTILHAS DE FREIO, DISCOS DE FREIO, REGULAGEM DO FREIO DE MÃO, TROCA DE DUAS PEÇAS DE PROTEÇÃO DO ROLAMENTO", "custo": 525.0, "causa": "PEÇAS"}]};
+const COLORS = {FTD0129:'#1B5E20',JSZ8F14:'#2E7D32',JIH5498:'#E65100',JIE3180:'#C62828'};
+const VCOLS  = ['#1B5E20','#2E7D32','#E65100','#C62828','#1565C0','#6A1B9A'];
+const SC = {grid:{color:'rgba(0,0,0,.06)'},ticks:{color:'#5A7A5A',font:{size:11}}};
+
+// ── TABS ─────────────────────────────────────────────────────────────────────
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── COMPUTAR ─────────────────────────────────────────────────────────────────
+function compute() {
+  const veic = [...new Set(D.km_records.map(r=>r.veiculo))].sort();
+  const km_v={},lit_v={},val_v={},man_v={};
+  veic.forEach(v=>{km_v[v]=0;lit_v[v]=0;val_v[v]=0;man_v[v]=0;});
+  D.km_records.forEach(r=>{if(km_v[r.veiculo]!==undefined) km_v[r.veiculo]+=r.km_rodado;});
+  D.ab_records.forEach(r=>{if(lit_v[r.veiculo]!==undefined){lit_v[r.veiculo]+=r.litros;val_v[r.veiculo]+=r.valor;}});
+  D.man_records.forEach(r=>{if(man_v[r.veiculo]!==undefined) man_v[r.veiculo]+=r.custo;});
+  const tot_km=Object.values(km_v).reduce((a,b)=>a+b,0);
+  const tot_lit=Object.values(lit_v).reduce((a,b)=>a+b,0);
+  const tot_val=Object.values(val_v).reduce((a,b)=>a+b,0);
+  const tot_man=Object.values(man_v).reduce((a,b)=>a+b,0);
+  const tot_ent=D.ent_records.reduce((a,r)=>a+r.entregas,0);
+  const kml=tot_lit>0?tot_km/tot_lit:0;
+  const ckm=tot_km>0?tot_val/tot_km:0;
+  const km_dia={};
+  D.km_records.forEach(r=>{km_dia[r.data]=(km_dia[r.data]||0)+r.km_rodado;});
+  const km_mot={};
+  D.km_records.forEach(r=>{const m=r.motorista==='Osair'?'Osair Lima':r.motorista;km_mot[m]=(km_mot[m]||0)+r.km_rodado;});
+  return {veic,km_v,lit_v,val_v,man_v,tot_km,tot_lit,tot_val,tot_man,tot_ent,kml,ckm,km_dia,km_mot};
+}
+
+function sortD(dates){
+  return [...dates].sort((a,b)=>{
+    const pa=a.split('/'),pb=b.split('/');
+    return(parseInt(pa[1])*100+parseInt(pa[0]))-(parseInt(pb[1])*100+parseInt(pb[0]));
+  });
+}
+
+// ── INICIAR ───────────────────────────────────────────────────────────────────
+const K = compute();
+const bgC = K.veic.map((v,i)=>COLORS[v]||VCOLS[i]);
+
+// Badge período
+const dias=sortD([...new Set(D.km_records.map(r=>r.data))]);
+if(dias.length) document.getElementById('bperiod').textContent=`📅 ${dias[0]} → ${dias[dias.length-1]}`;
+
+// ── ABA VISÃO GERAL ──────────────────────────────────────────────────────────
+document.getElementById('kpi-grid').innerHTML=[
+  {i:'🛣',l:'KM Rodados',v:K.tot_km.toLocaleString('pt-BR'),s:'Total do período',c:''},
+  {i:'⛽',l:'Litros Abastecidos',v:K.tot_lit.toFixed(1)+'L',s:'Total abastecido',c:''},
+  {i:'💰',l:'Gasto Combustível',v:'R$ '+K.tot_val.toLocaleString('pt-BR',{minimumFractionDigits:2}),s:'Total do período',c:'or'},
+  {i:'🏎',l:'Eficiência Média',v:K.kml.toFixed(2)+' Km/L',s:'Média da frota',c:''},
+  {i:'📊',l:'Custo por KM',v:'R$ '+K.ckm.toFixed(2),s:'Só combustível',c:'re'},
+  {i:'📦',l:'Total Entregas',v:K.tot_ent.toLocaleString('pt-BR'),s:'No período',c:'bl'},
+].map(c=>`<div class="kpi ${c.c}"><div class="kpi-ico">${c.i}</div><div class="kpi-lbl">${c.l}</div><div class="kpi-val">${c.v}</div><div class="kpi-sub">${c.s}</div></div>`).join('');
+
+const maxKmL=Math.max(...K.veic.map(v=>K.lit_v[v]>0?K.km_v[v]/K.lit_v[v]:0));
+document.getElementById('vgrid').innerHTML=K.veic.map((v,i)=>{
+  const kml=K.lit_v[v]>0?(K.km_v[v]/K.lit_v[v]).toFixed(2):'-';
+  const pct=maxKmL>0&&K.lit_v[v]>0?Math.round((K.km_v[v]/K.lit_v[v])/maxKmL*100):0;
+  const col=bgC[i];
+  return `<div class="vcard" style="border-top-color:${col}">
+    <div class="vplate">${v}</div>
+    <div class="vrow"><span>KM Rodados</span><span>${K.km_v[v].toLocaleString('pt-BR')} km</span></div>
+    <div class="vrow"><span>Litros</span><span>${K.lit_v[v].toFixed(1)} L</span></div>
+    <div class="vrow"><span>Combustível</span><span>R$ ${K.val_v[v].toFixed(2)}</span></div>
+    <div class="vrow"><span>Manutenção</span><span>R$ ${(K.man_v[v]||0).toFixed(2)}</span></div>
+    <div class="vrow"><span>Eficiência</span><span style="color:${col};font-weight:800">${kml} km/L</span></div>
+    <div class="ebar-w"><div class="ebar" style="width:${pct}%;background:${col}"></div></div>
+  </div>`;
+}).join('');
+
+// ── ABA QUILOMETRAGEM ────────────────────────────────────────────────────────
+new Chart(document.getElementById('c-km-v'),{type:'bar',
+  data:{labels:K.veic,datasets:[{label:'KM',data:K.veic.map(v=>K.km_v[v]),backgroundColor:bgC,borderRadius:6,borderSkipped:false}]},
+  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+    scales:{x:{...SC,ticks:{...SC.ticks,callback:v=>v+' km'}},y:SC}}});
+
+new Chart(document.getElementById('c-km-d'),{type:'doughnut',
+  data:{labels:K.veic,datasets:[{data:K.veic.map(v=>K.km_v[v]),backgroundColor:bgC,borderWidth:3,borderColor:'#fff',hoverOffset:8}]},
+  options:{responsive:true,maintainAspectRatio:false,cutout:'65%',
+    plugins:{legend:{position:'bottom',labels:{font:{size:11},color:'#1A2E1A',padding:12}}}}});
+
+const diasKm=sortD(Object.keys(K.km_dia));
+const kvd={};
+K.veic.forEach(v=>{kvd[v]={};D.km_records.forEach(r=>{if(r.veiculo===v) kvd[v][r.data]=(kvd[v][r.data]||0)+r.km_rodado;});});
+new Chart(document.getElementById('c-km-dia'),{type:'line',
+  data:{labels:diasKm,datasets:K.veic.map((v,i)=>{return{label:v,data:diasKm.map(d=>kvd[v][d]||null),
+    borderColor:bgC[i],backgroundColor:bgC[i]+'22',fill:false,tension:.4,pointRadius:4,pointHoverRadius:7,borderWidth:2,spanGaps:true};})},
+  options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+    plugins:{legend:{labels:{font:{size:11},color:'#1A2E1A'}}},
+    scales:{y:{...SC,ticks:{...SC.ticks,callback:v=>v+' km'}},x:SC}}});
+
+const mots=Object.entries(K.km_mot).sort((a,b)=>b[1]-a[1]);
+new Chart(document.getElementById('c-mot'),{type:'bar',
+  data:{labels:mots.map(m=>m[0]),datasets:[{label:'KM',data:mots.map(m=>m[1]),
+    backgroundColor:mots.map((_,i)=>VCOLS[i]||'#388E3C'),borderRadius:6,borderSkipped:false}]},
+  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+    scales:{x:{...SC,ticks:{...SC.ticks,callback:v=>v+' km'}},y:SC}}});
+
+// ── ABA COMBUSTÍVEL ──────────────────────────────────────────────────────────
+const kmlD=K.veic.map(v=>K.lit_v[v]>0?+(K.km_v[v]/K.lit_v[v]).toFixed(2):0);
+const avgKml=kmlD.reduce((a,b)=>a+b,0)/kmlD.length;
+new Chart(document.getElementById('c-kml'),{type:'bar',
+  data:{labels:K.veic,datasets:[
+    {label:'Km/L',data:kmlD,backgroundColor:kmlD.map(v=>v>=avgKml?'rgba(27,94,32,.85)':'rgba(198,40,40,.75)'),borderRadius:6,borderSkipped:false},
+    {label:'Média',data:Array(K.veic.length).fill(+avgKml.toFixed(2)),type:'line',borderColor:'#FF8C00',borderDash:[6,4],pointRadius:0,borderWidth:2,fill:false}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{size:11},color:'#1A2E1A'}}},
+    scales:{y:{...SC,ticks:{...SC.ticks,callback:v=>v+' km/L'}},x:SC}}});
+
+new Chart(document.getElementById('c-custo'),{type:'bar',
+  data:{labels:K.veic,datasets:[
+    {label:'Combustível (R$)',data:K.veic.map(v=>K.val_v[v].toFixed(2)),backgroundColor:bgC,borderRadius:6,borderSkipped:false},
+    {label:'Manutenção (R$)',data:K.veic.map(v=>(K.man_v[v]||0).toFixed(2)),backgroundColor:'rgba(230,81,0,.65)',borderRadius:6,borderSkipped:false}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{size:11},color:'#1A2E1A'}}},
+    scales:{x:SC,y:{...SC,ticks:{...SC.ticks,callback:v=>'R$ '+v}}}}});
+
+const abD=sortD([...new Set(D.ab_records.map(r=>r.data))]);
+const abAc={};
+K.veic.forEach(v=>{abAc[v]={};let ac=0;abD.forEach(dt=>{ac+=D.ab_records.filter(r=>r.veiculo===v&&r.data===dt).reduce((s,r)=>s+r.litros,0);abAc[v][dt]=ac;});});
+new Chart(document.getElementById('c-ab'),{type:'line',
+  data:{labels:abD,datasets:K.veic.map((v,i)=>{return{label:v,data:abD.map(dt=>abAc[v][dt]||null),
+    borderColor:bgC[i],backgroundColor:bgC[i]+'18',fill:true,tension:.4,pointRadius:3,borderWidth:2,spanGaps:true};})},
+  options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+    plugins:{legend:{labels:{font:{size:11},color:'#1A2E1A'}}},
+    scales:{y:{...SC,ticks:{...SC.ticks,callback:v=>v.toFixed(0)+'L'}},x:SC}}});
+
+document.getElementById('tab-ab').innerHTML=[...D.ab_records].reverse().slice(0,25).map(r=>{
+  const prL=r.litros>0?'R$ '+(r.valor/r.litros).toFixed(2):'-';
+  const col=COLORS[r.veiculo]||'#2E7D32';
+  return `<tr><td>${r.data}</td><td><span class="tag" style="background:${col}22;color:${col}">${r.veiculo}</span></td>
+    <td>${r.litros.toFixed(2)} L</td><td>R$ ${r.valor.toFixed(2)}</td><td>${prL}</td></tr>`;
+}).join('');
+
+// ── ABA ENTREGAS ──────────────────────────────────────────────────────────────
+new Chart(document.getElementById('c-ent'),{type:'bar',
+  data:{labels:D.ent_records.map(r=>r.data),datasets:[{
+    label:'Entregas',data:D.ent_records.map(r=>r.entregas),
+    backgroundColor:'rgba(46,125,50,.75)',borderColor:'#2E7D32',borderWidth:1.5,borderRadius:5,borderSkipped:false
+  }]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+    scales:{y:SC,x:SC}}});
+document.getElementById('tot-ent-big').textContent=K.tot_ent.toLocaleString('pt-BR');
+document.getElementById('med-ent-big').textContent=(K.tot_ent/D.ent_records.length).toFixed(1);
+
+// ── ABA MANUTENÇÃO ────────────────────────────────────────────────────────────
+const manV=K.veic.filter(v=>K.man_v[v]>0);
+new Chart(document.getElementById('c-man-v'),{type:'bar',
+  data:{labels:manV,datasets:[{label:'Custo (R$)',data:manV.map(v=>K.man_v[v]),
+    backgroundColor:manV.map(v=>COLORS[v]||'#2E7D32'),borderRadius:6,borderSkipped:false}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+    scales:{y:{...SC,ticks:{...SC.ticks,callback:v=>'R$ '+v}},x:SC}}});
+
+const manTipo={};
+D.man_records.forEach(r=>{manTipo[r.tipo]=(manTipo[r.tipo]||0)+r.custo;});
+const tL=Object.keys(manTipo);
+new Chart(document.getElementById('c-man-t'),{type:'doughnut',
+  data:{labels:tL,datasets:[{data:tL.map(t=>manTipo[t]),backgroundColor:['#C62828','#1B5E20','#E65100'],borderWidth:3,borderColor:'#fff',hoverOffset:6}]},
+  options:{responsive:true,maintainAspectRatio:false,cutout:'55%',
+    plugins:{legend:{position:'bottom',labels:{font:{size:11},color:'#1A2E1A',padding:10}}}}});
+
+const manCausa={};
+D.man_records.forEach(r=>{manCausa[r.causa]=(manCausa[r.causa]||0)+r.custo;});
+const cL=Object.keys(manCausa);
+new Chart(document.getElementById('c-man-c'),{type:'bar',
+  data:{labels:cL,datasets:[{label:'Custo (R$)',data:cL.map(c=>manCausa[c]),
+    backgroundColor:['#C62828','#E65100','#1B5E20','#1565C0'],borderRadius:6,borderSkipped:false}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+    scales:{y:{...SC,ticks:{...SC.ticks,callback:v=>'R$ '+v}},x:SC}}});
+
+document.getElementById('tab-man').innerHTML=D.man_records.map(r=>{
+  const tag=r.tipo==='PREVENTIVA'
+    ?'<span class="tag" style="background:#E8F5E9;color:#1B5E20">PREVENTIVA</span>'
+    :'<span class="tag" style="background:#FFEBEE;color:#C62828">CORRETIVA</span>';
+  return `<tr><td>${r.data}</td><td><b>${r.veiculo}</b></td><td>${tag}</td>
+    <td style="max-width:260px;font-size:.77rem">${r.desc}</td><td>${r.causa}</td><td><b>R$ ${r.custo.toFixed(2)}</b></td></tr>`;
+}).join('');
+</script>
+</body>
+</html>
