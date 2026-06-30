@@ -1,0 +1,1021 @@
+{
+  "km_records": [
+    {
+      "data": "01/06",
+      "veiculo": "FTD0129",
+      "km_ini": 317561.0,
+      "km_fin": 317595.0,
+      "km_rodado": 34.0,
+      "motorista": "Gabriel"
+    },
+    {
+      "data": "01/06",
+      "veiculo": "JSZ8F14",
+      "km_ini": 224007.0,
+      "km_fin": 224096.0,
+      "km_rodado": 89.0,
+      "motorista": "Rudson"
+    },
+    {
+      "data": "02/06",
+      "veiculo": "JSZ8F14",
+      "km_ini": 224184.0,
+      "km_fin": 224275.0,
+      "km_rodado": 91.0,
+      "motorista": "Rudson"
+    },
+    {
+      "data": "02/06",
+      "veiculo": "JIH5498",
+      "km_ini": 371645.0,
+      "km_fin": 371713.0,
+      "km_rodado": 68.0,
+      "motorista": "Roniel"
+    },
+    {
+      "data": "02/06",
+      "veiculo": "FTD0129",
+      "km_ini": 317600.0,
+      "km_fin": 317717.0,
+      "km_rodado": 117.0,
+      "motorista": "Gabriel"
+    },
+    {
+      "data": "03/06",
+      "veiculo": "JIE3180",
+      "km_ini": 353328.0,
+      "km_fin": 353398.0,
+      "km_rodado": 70.0,
+      "motorista": "Roniel"
+    },
+    {
+      "data": "03/06",
+      "veiculo": "JIH5498",
+      "km_ini": 371770.0,
+      "km_fin": 371860.0,
+      "km_rodado": 90.0,
+      "motorista": "Jacó"
+    },
+    {
+      "data": "03/06",
+      "veiculo": "FTD0129",
+      "km_ini": 317717.0,
+      "km_fin": 317781.0,
+      "km_rodado": 64.0,
+      "motorista": "Gabriel"
+    },
+    {
+      "data": "03/06",
+      "veiculo": "JSZ8F14",
+      "km_ini": 224360.0,
+      "km_fin": 224490.0,
+      "km_rodado": 130.0,
+      "motorista": "Rudson"
+    },
+    {
+      "data": "05/06",
+      "veiculo": "JIH5498",
+      "km_ini": 371916.0,
+      "km_fin": 371991.0,
+      "km_rodado": 75.0,
+      "motorista": "Osair Lima"
+    },
+    {
+      "data": "05/06",
+      "veiculo": "JSZ8F14",
+      "km_ini": 224511.0,
+      "km_fin": 224593.0,
+      "km_rodado": 82.0,
+      "motorista": "Rudson"
+    },
+    {
+      "data": "05/06",
+      "veiculo": "JIE3180",
+      "km_ini": 353426.0,
+      "km_fin": 353538.0,
+      "km_rodado": 112.0,
+      "motorista": "Jacó"
+    },
+    {
+      "data": "05/06",
+      "veiculo": "FTD0129",
+      "km_ini": 317877.0,
+      "km_fin": 317946.0,
+      "km_rodado": 69.0,
+      "motorista": "Gabriel"
+    },
+    {
+      "data": "06/06",
+      "veiculo": "JSZ8F14",
+      "km_ini": 224688.0,
+      "km_fin": 224739.0,
+      "km_rodado": 51.0,
+      "motorista": "Rudson"
+    },
+    {
+      "data": "08/06",
+      "veiculo": "JSZ8F14",
+      "km_ini": 224747.0,
+      "km_fin": 224791.0,
+      "km_rodado": 44.0,
+      "motorista": "Rudson"
+    },
+    {
+      "data": "08/06",
+      "veiculo": "JIH5498",
+      "km_ini": 372178.0,
+      "km_fin": 372300.0,
+      "km_rodado": 122.0,
+      "motorista": "Jacó"
+    },
+    {
+      "data": "08/06",
+      "veiculo": "FTD0129",
+      "km_ini": 318183.0,
+      "km_fin": 318222.0,
+      "km_rodado": 39.0,
+      "motorista": "Rudson"
+    },
+    {
+      "data": "09/06",
+      "veiculo": "JIH5498",
+      "km_ini": 372358.0,
+      "km_fin": 372458.0,
+      "km_rodado": 100.0,
+      "motorista": "Osair Lima"
+    },
+    {
+      "data": "09/06",
+      "veiculo": "JSZ8F14",
+      "km_ini": 224949.0,
+      "km_fin": 225012.0,
+      "km_rodado": 63.0,
+      "motorista": "Rudson"
+    },
+    {
+      "data": "09/06",
+      "veiculo": "JIE3180",
+      "km_ini": 353772.0,
+      "km_fin": 353869.0,
+      "km_rodado": 97.0,
+      "motorista": "Jacó"
+    },
+    {
+      "data": "10/06",
+      "veiculo": "FTD0129",
+      "km_ini": 318485.0,
+      "km_fin": 318584.0,
+      "km_rodado": 99.0,
+      "motorista": "Gabriel"
+    },
+    {
+      "data": "10/06",
+      "veiculo": "JIE3180",
+      "km_ini": 353926.0,
+      "km_fin": 354016.0,
+      "km_rodado": 90.0,
+      "motorista": "Jacó"
+    },
+    {
+      "data": "10/06",
+      "veiculo": "JSZ8F14",
+      "km_ini": 225084.0,
+      "km_fin": 225176.0,
+      "km_rodado": 92.0,
+      "motorista": "Rudson"
+    },
+    {
+      "data": "10/06",
+      "veiculo": "JIH5498",
+      "km_ini": 372516.0,
+      "km_fin": 372582.0,
+      "km_rodado": 66.0,
+      "motorista": "Osair Lima"
+    },
+    {
+      "data": "11/06",
+      "veiculo": "JIE3180",
+      "km_ini": 354039.0,
+      "km_fin": 354105.0,
+      "km_rodado": 66.0,
+      "motorista": "Osair Lima"
+    },
+    {
+      "data": "11/06",
+      "veiculo": "JSZ8F14",
+      "km_ini": 225237.0,
+      "km_fin": 225320.0,
+      "km_rodado": 83.0,
+      "motorista": "Rudson"
+    },
+    {
+      "data": "12/06",
+      "veiculo": "JSZ8F14",
+      "km_ini": 225489.0,
+      "km_fin": 225602.0,
+      "km_rodado": 113.0,
+      "motorista": "Rudson"
+    },
+    {
+      "data": "12/06",
+      "veiculo": "JIE3180",
+      "km_ini": 354199.0,
+      "km_fin": 354264.0,
+      "km_rodado": 65.0,
+      "motorista": "Jacó"
+    },
+    {
+      "data": "12/06",
+      "veiculo": "FTD0129",
+      "km_ini": 319015.0,
+      "km_fin": 319126.0,
+      "km_rodado": 111.0,
+      "motorista": "Jacó"
+    },
+    {
+      "data": "13/06",
+      "veiculo": "JSZ8F14",
+      "km_ini": 225715.0,
+      "km_fin": 225800.0,
+      "km_rodado": 85.0,
+      "motorista": "Rudson"
+    },
+    {
+      "data": "15/06",
+      "veiculo": "JIE3180",
+      "km_ini": 354325.0,
+      "km_fin": 354411.0,
+      "km_rodado": 86.0,
+      "motorista": "Rudson"
+    },
+    {
+      "data": "16/06",
+      "veiculo": "JSZ8F14",
+      "km_ini": 225921.0,
+      "km_fin": 226007.0,
+      "km_rodado": 86.0,
+      "motorista": "Rudson"
+    },
+    {
+      "data": "16/06",
+      "veiculo": "FTD0129",
+      "km_ini": 319301.0,
+      "km_fin": 319466.0,
+      "km_rodado": 165.0,
+      "motorista": "Osair Lima"
+    },
+    {
+      "data": "16/06",
+      "veiculo": "JIE3180",
+      "km_ini": 354485.0,
+      "km_fin": 354565.0,
+      "km_rodado": 80.0,
+      "motorista": "Jacó"
+    },
+    {
+      "data": "17/06",
+      "veiculo": "JSZ8F14",
+      "km_ini": 226142.0,
+      "km_fin": 226219.0,
+      "km_rodado": 77.0,
+      "motorista": "Rudson"
+    },
+    {
+      "data": "17/06",
+      "veiculo": "JIE3180",
+      "km_ini": 354631.0,
+      "km_fin": 354737.0,
+      "km_rodado": 106.0,
+      "motorista": "Jacó"
+    },
+    {
+      "data": "18/06",
+      "veiculo": "JIE3180",
+      "km_ini": 354757.0,
+      "km_fin": 354818.0,
+      "km_rodado": 61.0,
+      "motorista": "Osair Lima"
+    },
+    {
+      "data": "18/06",
+      "veiculo": "JSZ8F14",
+      "km_ini": 226229.0,
+      "km_fin": 226321.0,
+      "km_rodado": 92.0,
+      "motorista": "Rudson"
+    },
+    {
+      "data": "18/06",
+      "veiculo": "FTD0129",
+      "km_ini": 319598.0,
+      "km_fin": 319638.0,
+      "km_rodado": 40.0,
+      "motorista": "Gabriel"
+    },
+    {
+      "data": "19/06",
+      "veiculo": "FTD0129",
+      "km_ini": 319782.0,
+      "km_fin": 319829.0,
+      "km_rodado": 47.0,
+      "motorista": "Gabriel"
+    },
+    {
+      "data": "19/06",
+      "veiculo": "JSZ8F14",
+      "km_ini": 226380.0,
+      "km_fin": 226433.0,
+      "km_rodado": 53.0,
+      "motorista": "Rudson"
+    },
+    {
+      "data": "20/06",
+      "veiculo": "JIE3180",
+      "km_ini": 354888.0,
+      "km_fin": 354963.0,
+      "km_rodado": 75.0,
+      "motorista": "Osair Lima"
+    },
+    {
+      "data": "20/06",
+      "veiculo": "JSZ8F14",
+      "km_ini": 226558.0,
+      "km_fin": 226610.0,
+      "km_rodado": 52.0,
+      "motorista": "Rudson"
+    },
+    {
+      "data": "22/06",
+      "veiculo": "JIE3180",
+      "km_ini": 354984.0,
+      "km_fin": 355051.0,
+      "km_rodado": 67.0,
+      "motorista": "Osair Lima"
+    },
+    {
+      "data": "22/06",
+      "veiculo": "JSZ8F14",
+      "km_ini": 226631.0,
+      "km_fin": 226745.0,
+      "km_rodado": 114.0,
+      "motorista": "Rudson"
+    },
+    {
+      "data": "23/06",
+      "veiculo": "JSZ8F14",
+      "km_ini": 226836.0,
+      "km_fin": 226907.0,
+      "km_rodado": 71.0,
+      "motorista": "Rudson"
+    },
+    {
+      "data": "23/06",
+      "veiculo": "JIE3180",
+      "km_ini": 355091.0,
+      "km_fin": 355157.0,
+      "km_rodado": 66.0,
+      "motorista": "Jacó"
+    },
+    {
+      "data": "23/06",
+      "veiculo": "FTD0129",
+      "km_ini": 320223.0,
+      "km_fin": 320295.0,
+      "km_rodado": 72.0,
+      "motorista": "Gabriel"
+    },
+    {
+      "data": "24/06",
+      "veiculo": "JSZ8F14",
+      "km_ini": 226960.0,
+      "km_fin": 227062.0,
+      "km_rodado": 102.0,
+      "motorista": "Rudson"
+    },
+    {
+      "data": "24/06",
+      "veiculo": "JIE3180",
+      "km_ini": 355186.0,
+      "km_fin": 355292.0,
+      "km_rodado": 106.0,
+      "motorista": "Jacó"
+    },
+    {
+      "data": "24/06",
+      "veiculo": "FTD0129",
+      "km_ini": 320325.0,
+      "km_fin": 320510.0,
+      "km_rodado": 185.0,
+      "motorista": "Gabriel"
+    },
+    {
+      "data": "25/06",
+      "veiculo": "FTD0129",
+      "km_ini": 320516.0,
+      "km_fin": 320625.0,
+      "km_rodado": 109.0,
+      "motorista": "Gabriel"
+    },
+    {
+      "data": "25/06",
+      "veiculo": "JSZ8F14",
+      "km_ini": 227084.0,
+      "km_fin": 227172.0,
+      "km_rodado": 88.0,
+      "motorista": "Rudson"
+    },
+    {
+      "data": "25/06",
+      "veiculo": "JIE3180",
+      "km_ini": 355303.0,
+      "km_fin": 355357.0,
+      "km_rodado": 54.0,
+      "motorista": "Jacó"
+    },
+    {
+      "data": "26/06",
+      "veiculo": "JIE3180",
+      "km_ini": 355415.0,
+      "km_fin": 355508.0,
+      "km_rodado": 93.0,
+      "motorista": "Jacó"
+    },
+    {
+      "data": "26/06",
+      "veiculo": "JSZ8F14",
+      "km_ini": 227205.0,
+      "km_fin": 227348.0,
+      "km_rodado": 143.0,
+      "motorista": "Rudson"
+    },
+    {
+      "data": "26/06",
+      "veiculo": "FTD0129",
+      "km_ini": 320221.0,
+      "km_fin": 320646.0,
+      "km_rodado": 425.0,
+      "motorista": "Gabriel"
+    },
+    {
+      "data": "27/06",
+      "veiculo": "JSZ8F14",
+      "km_ini": 227369.0,
+      "km_fin": 227463.0,
+      "km_rodado": 94.0,
+      "motorista": "Rudson"
+    },
+    {
+      "data": "29/06",
+      "veiculo": "JIE3180",
+      "km_ini": 355612.0,
+      "km_fin": 355738.0,
+      "km_rodado": 126.0,
+      "motorista": "Osair Lima"
+    },
+    {
+      "data": "29/06",
+      "veiculo": "JSZ8F14",
+      "km_ini": 227484.0,
+      "km_fin": 227569.0,
+      "km_rodado": 85.0,
+      "motorista": "Rudson"
+    },
+    {
+      "data": "30/06",
+      "veiculo": "JSZ8F14",
+      "km_ini": 227539.0,
+      "km_fin": 227618.0,
+      "km_rodado": 79.0,
+      "motorista": "Rudson"
+    },
+    {
+      "data": "30/06",
+      "veiculo": "FTD0129",
+      "km_ini": 320816.0,
+      "km_fin": 320924.0,
+      "km_rodado": 108.0,
+      "motorista": "Gabriel"
+    },
+    {
+      "data": "30/06",
+      "veiculo": "JIE3180",
+      "km_ini": 355758.0,
+      "km_fin": 355801.0,
+      "km_rodado": 43.0,
+      "motorista": "Osair Lima"
+    }
+  ],
+  "ab_records": [
+    {
+      "data": "01/06",
+      "veiculo": "FTD0129",
+      "litros": 4.76,
+      "valor": 30.0
+    },
+    {
+      "data": "02/06",
+      "veiculo": "JSZ8F14",
+      "litros": 20.0,
+      "valor": 123.8
+    },
+    {
+      "data": "03/06",
+      "veiculo": "FTD0129",
+      "litros": 15.175,
+      "valor": 100.0
+    },
+    {
+      "data": "03/06",
+      "veiculo": "JIH5498",
+      "litros": 15.175,
+      "valor": 100.0
+    },
+    {
+      "data": "03/06",
+      "veiculo": "JIE3180",
+      "litros": 10.622,
+      "valor": 70.0
+    },
+    {
+      "data": "03/06",
+      "veiculo": "JSZ8F14",
+      "litros": 10.0,
+      "valor": 61.9
+    },
+    {
+      "data": "05/06",
+      "veiculo": "JIE3180",
+      "litros": 15.175,
+      "valor": 100.0
+    },
+    {
+      "data": "05/06",
+      "veiculo": "JSZ8F14",
+      "litros": 15.175,
+      "valor": 100.0
+    },
+    {
+      "data": "05/06",
+      "veiculo": "JIH5498",
+      "litros": 15.175,
+      "valor": 100.0
+    },
+    {
+      "data": "05/06",
+      "veiculo": "JSZ8F14",
+      "litros": 15.0,
+      "valor": 92.85
+    },
+    {
+      "data": "06/06",
+      "veiculo": "JIE3180",
+      "litros": 15.175,
+      "valor": 100.0
+    },
+    {
+      "data": "06/06",
+      "veiculo": "FTD0129",
+      "litros": 11.228,
+      "valor": 75.0
+    },
+    {
+      "data": "06/06",
+      "veiculo": "JIH5498",
+      "litros": 15.175,
+      "valor": 100.0
+    },
+    {
+      "data": "08/06",
+      "veiculo": "JIH5498",
+      "litros": 15.175,
+      "valor": 100.0
+    },
+    {
+      "data": "08/06",
+      "veiculo": "JSZ8F14",
+      "litros": 20.0,
+      "valor": 125.16
+    },
+    {
+      "data": "08/06",
+      "veiculo": "FTD0129",
+      "litros": 15.175,
+      "valor": 100.0
+    },
+    {
+      "data": "09/06",
+      "veiculo": "JIE3180",
+      "litros": 16.156,
+      "valor": 100.0
+    },
+    {
+      "data": "09/06",
+      "veiculo": "JIH5498",
+      "litros": 15.175,
+      "valor": 100.0
+    },
+    {
+      "data": "10/06",
+      "veiculo": "JIE3180",
+      "litros": 16.156,
+      "valor": 100.0
+    },
+    {
+      "data": "10/06",
+      "veiculo": "JIH5498",
+      "litros": 15.175,
+      "valor": 100.0
+    },
+    {
+      "data": "10/06",
+      "veiculo": "FTD0129",
+      "litros": 15.175,
+      "valor": 100.0
+    },
+    {
+      "data": "10/06",
+      "veiculo": "JSZ8F14",
+      "litros": 15.175,
+      "valor": 100.0
+    },
+    {
+      "data": "11/06",
+      "veiculo": "FTD0129",
+      "litros": 15.175,
+      "valor": 100.0
+    },
+    {
+      "data": "11/06",
+      "veiculo": "JIE3180",
+      "litros": 15.175,
+      "valor": 100.0
+    },
+    {
+      "data": "11/06",
+      "veiculo": "JSZ8F14",
+      "litros": 15.175,
+      "valor": 100.0
+    },
+    {
+      "data": "12/06",
+      "veiculo": "JSZ8F14",
+      "litros": 22.762,
+      "valor": 150.0
+    },
+    {
+      "data": "13/06",
+      "veiculo": "FTD0129",
+      "litros": 15.175,
+      "valor": 100.0
+    },
+    {
+      "data": "13/06",
+      "veiculo": "JIE3180",
+      "litros": 15.175,
+      "valor": 100.0
+    },
+    {
+      "data": "13/06",
+      "veiculo": "JSZ8F14",
+      "litros": 15.175,
+      "valor": 100.0
+    },
+    {
+      "data": "15/06",
+      "veiculo": "FTD0129",
+      "litros": 22.762,
+      "valor": 150.0
+    },
+    {
+      "data": "15/06",
+      "veiculo": "JSZ8F14",
+      "litros": 22.762,
+      "valor": 150.0
+    },
+    {
+      "data": "15/06",
+      "veiculo": "JIE3180",
+      "litros": 22.762,
+      "valor": 150.0
+    },
+    {
+      "data": "16/06",
+      "veiculo": "FTD0129",
+      "litros": 15.175,
+      "valor": 100.0
+    },
+    {
+      "data": "17/06",
+      "veiculo": "JIE3180",
+      "litros": 25.042,
+      "valor": 150.0
+    },
+    {
+      "data": "17/06",
+      "veiculo": "FTD0129",
+      "litros": 14.948,
+      "valor": 100.0
+    },
+    {
+      "data": "17/06",
+      "veiculo": "JSZ8F14",
+      "litros": 15.175,
+      "valor": 100.0
+    },
+    {
+      "data": "19/06",
+      "veiculo": "FTD0129",
+      "litros": 15.175,
+      "valor": 100.0
+    },
+    {
+      "data": "19/06",
+      "veiculo": "JSZ8F14",
+      "litros": 15.175,
+      "valor": 100.0
+    },
+    {
+      "data": "19/06",
+      "veiculo": "JIE3180",
+      "litros": 15.175,
+      "valor": 100.0
+    },
+    {
+      "data": "20/06",
+      "veiculo": "JSZ8F14",
+      "litros": 15.175,
+      "valor": 100.0
+    },
+    {
+      "data": "22/06",
+      "veiculo": "FTD0129",
+      "litros": 15.175,
+      "valor": 100.0
+    },
+    {
+      "data": "22/06",
+      "veiculo": "JIE3180",
+      "litros": 15.175,
+      "valor": 100.0
+    },
+    {
+      "data": "23/06",
+      "veiculo": "JIE3180",
+      "litros": 15.175,
+      "valor": 100.0
+    },
+    {
+      "data": "24/06",
+      "veiculo": "JSZ8F14",
+      "litros": 15.898,
+      "valor": 100.0
+    },
+    {
+      "data": "24/06",
+      "veiculo": "JIE3180",
+      "litros": 15.898,
+      "valor": 100.0
+    },
+    {
+      "data": "24/06",
+      "veiculo": "FTD0129",
+      "litros": 15.898,
+      "valor": 100.0
+    },
+    {
+      "data": "25/06",
+      "veiculo": "FTD0129",
+      "litros": 15.898,
+      "valor": 100.0
+    },
+    {
+      "data": "25/06",
+      "veiculo": "JIE3180",
+      "litros": 15.898,
+      "valor": 100.0
+    },
+    {
+      "data": "26/06",
+      "veiculo": "JSZ8F14",
+      "litros": 15.898,
+      "valor": 100.0
+    },
+    {
+      "data": "27/06",
+      "veiculo": "JIE3180",
+      "litros": 16.978,
+      "valor": 100.0
+    },
+    {
+      "data": "30/06",
+      "veiculo": "JSZ8F14",
+      "litros": 25.467,
+      "valor": 150.0
+    },
+    {
+      "data": "30/06",
+      "veiculo": "FTD0129",
+      "litros": 25.467,
+      "valor": 150.0
+    },
+    {
+      "data": "30/06",
+      "veiculo": "JIH5498",
+      "litros": 25.467,
+      "valor": 150.0
+    }
+  ],
+  "ent_records": [
+    {
+      "data": "01/06",
+      "entregas": 40,
+      "km_dia": 123
+    },
+    {
+      "data": "02/06",
+      "entregas": 36,
+      "km_dia": 276
+    },
+    {
+      "data": "03/06",
+      "entregas": 39,
+      "km_dia": 242
+    },
+    {
+      "data": "05/06",
+      "entregas": 36,
+      "km_dia": 338
+    },
+    {
+      "data": "06/06",
+      "entregas": 27,
+      "km_dia": 51
+    },
+    {
+      "data": "08/06",
+      "entregas": 42,
+      "km_dia": 205
+    },
+    {
+      "data": "09/06",
+      "entregas": 38,
+      "km_dia": 260
+    },
+    {
+      "data": "10/06",
+      "entregas": 28,
+      "km_dia": 347
+    },
+    {
+      "data": "11/06",
+      "entregas": 34,
+      "km_dia": 149
+    },
+    {
+      "data": "12/06",
+      "entregas": 41,
+      "km_dia": 178
+    },
+    {
+      "data": "13/06",
+      "entregas": 21,
+      "km_dia": 86
+    },
+    {
+      "data": "15/06",
+      "entregas": 36,
+      "km_dia": 85
+    },
+    {
+      "data": "16/06",
+      "entregas": 37,
+      "km_dia": 331
+    },
+    {
+      "data": "17/06",
+      "entregas": 33,
+      "km_dia": 92
+    },
+    {
+      "data": "18/06",
+      "entregas": 37,
+      "km_dia": 205
+    },
+    {
+      "data": "19/06",
+      "entregas": 34,
+      "km_dia": 109
+    },
+    {
+      "data": "20/06",
+      "entregas": 25,
+      "km_dia": 127
+    },
+    {
+      "data": "22/06",
+      "entregas": 43,
+      "km_dia": 181
+    },
+    {
+      "data": "23/06",
+      "entregas": 30,
+      "km_dia": 209
+    },
+    {
+      "data": "24/06",
+      "entregas": 29,
+      "km_dia": 208
+    },
+    {
+      "data": "25/06",
+      "entregas": 28,
+      "km_dia": 251
+    },
+    {
+      "data": "26/06",
+      "entregas": 32,
+      "km_dia": 661
+    },
+    {
+      "data": "27/06",
+      "entregas": 29,
+      "km_dia": 198
+    },
+    {
+      "data": "29/06",
+      "entregas": 27,
+      "km_dia": 211
+    },
+    {
+      "data": "30/06",
+      "entregas": 33,
+      "km_dia": 230
+    }
+  ],
+  "man_records": [
+    {
+      "data": "02/06",
+      "veiculo": "JIE3180",
+      "tipo": "CORRETIVA",
+      "desc": "ÓLEO, FILTRO DE ÓLEO, TERMINAL, MAGNÉTICA E MÃO DE OBRA",
+      "custo": 310.0,
+      "causa": "PEÇAS"
+    },
+    {
+      "data": "02/06",
+      "veiculo": "JIE3180",
+      "tipo": "CORRETIVA",
+      "desc": "GASOLINA PRA LAVAR PEÇAS",
+      "custo": 10.0,
+      "causa": "PEÇAS"
+    },
+    {
+      "data": "11/06",
+      "veiculo": "FTD0129",
+      "tipo": "PREVENTIVA",
+      "desc": "FILTRO DE ÓLEO E OLÉO DE MOTOR",
+      "custo": 556.0,
+      "causa": "TROCA DE ÓLEO"
+    },
+    {
+      "data": "11/06",
+      "veiculo": "FTD0129",
+      "tipo": "CORRETIVA",
+      "desc": "ABRAÇADEIRAS E FILTRO DE AR",
+      "custo": 55.0,
+      "causa": "PEÇAS"
+    },
+    {
+      "data": "11/06",
+      "veiculo": "JIE3180",
+      "tipo": "CORRETIVA",
+      "desc": "REMENDO DE PNEU",
+      "custo": 200.0,
+      "causa": "PNEU"
+    },
+    {
+      "data": "15/06",
+      "veiculo": "JSZ8F14",
+      "tipo": "CORRETIVA",
+      "desc": "ÓLEO, CILINDRO, ROLAMENTO E MÃO DE OBRA",
+      "custo": 640.0,
+      "causa": "PEÇAS"
+    },
+    {
+      "data": "19/06",
+      "veiculo": "JIE3180",
+      "tipo": "CORRETIVA",
+      "desc": "TROCA PASTILHAS DE FREIO, DISCOS DE FREIO, REGULAGEM DO FREIO DE MÃO, TROCA DE DUAS PEÇAS DE PROTEÇÃO DO ROLAMENTO",
+      "custo": 525.0,
+      "causa": "PEÇAS"
+    },
+    {
+      "data": "26/06",
+      "veiculo": "NOG2A74",
+      "tipo": "CORRETIVA",
+      "desc": "AMORTECEDOR, BRAÇO OSCILANTE, BUCHA TIRANTE, COIFA CAMBIO, OLEO DE CAMBIO, JUNTA FIXA, BLOCO MOTOR, BOMBA DAGUA, CORREIA DENTADA, BARRA ESTABILIZADORA, BUCHA DA BARRA",
+      "custo": 2539.0,
+      "causa": "PEÇAS"
+    }
+  ]
+}
